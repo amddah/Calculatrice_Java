@@ -20,7 +20,7 @@ Ce projet est une calculatrice simple implémentée en Java à l'aide de l'inter
 ![Capture d'écran 1](screenshots/screenshot1.jpg)
 ![Capture d'écran 2](screenshots/screenshot2.jpg)
 
-##Note additionnelle
+## Note additionnelle
 Un fichier .jar a été ajouté au dépôt pour une exécution plus simple.
 Vous pouvez exécuter le fichier .jar fourni directement avec la commande : java -jar Calculatrice.jar.
 ## Licence
