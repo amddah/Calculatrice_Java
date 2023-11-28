@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Calculatrice extends JFrame {
 
@@ -46,6 +48,13 @@ public class Calculatrice extends JFrame {
 
         radioDiv.setText("Division");
         btnGroup.add(radioDiv);
+
+        //defini action commande
+        radioDiv.setActionCommand("Division");
+        radioMult.setActionCommand("Multiplication");
+        radioSous.setActionCommand("Soustraction");
+        radioAdd.setActionCommand("Addition");
+
         TitledBorder titledBorder = BorderFactory.createTitledBorder("Opération");
         titledBorder.setTitleJustification(TitledBorder.DEFAULT_JUSTIFICATION);
         panRadio.setBorder(BorderFactory.createCompoundBorder(titledBorder, new EmptyBorder(10, 10, 10, 10)));
@@ -66,13 +75,59 @@ public class Calculatrice extends JFrame {
         this.add(panSaisi,BorderLayout.NORTH);
 
         this.add(panCheckBox,BorderLayout.CENTER);
-        //this.add(panRadio,BorderLayout.CENTER);
-        //this.getContentPane().add(panRadio);
+
         // Paramètres : top, left, bottom, right
         this.getRootPane().setBorder(new EmptyBorder(10, 10, 20, 10));
 
         this.setSize(500,300);
         this.setVisible(true);
+
+        //d'implémenter ActionListener
+
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                //recupere le nombre dans TextField
+                String value1 = Nombre1.getText();
+                String value2 = Nombre2.getText();
+                double nbr1 =Double.parseDouble(value1);
+                double nbr2 =Double.parseDouble(value2);
+                // Récupère la commande associée au modèle du bouton radio sélectionné
+                String operation = btnGroup.getSelection().getActionCommand();
+                // Vérifie si la case à cocher est cochée
+                boolean sansvirgule= checkBox.isSelected();
+
+                if ("Addition".equals(operation)) {
+                    double somme = nbr2 + nbr1;
+                    // si la case à cocher est cochée affiche le resultat en entier
+                        AfficheResultat( sansvirgule ? String.valueOf((int) somme) :String.valueOf(somme));
+                } else if ("Soustraction".equals(operation)) {
+                    double difference = nbr1 - nbr2;
+                    AfficheResultat(sansvirgule ? String.valueOf((int) difference) : String.valueOf(difference));
+                } else if ("Multiplication".equals(operation)) {
+                    double produit = nbr2 * nbr1;
+                    AfficheResultat(sansvirgule ? String.valueOf((int) produit) : String.valueOf(produit));
+                } else if ("Division".equals(operation)) {
+                    // Gérer la division (vérifier la division par zéro, etc.)
+                    if (nbr1 != 0) {
+                        double quotient = nbr2 / nbr1;
+                        AfficheResultat(sansvirgule ? String.valueOf((int) quotient) :String.valueOf(quotient));
+                    } else {
+                        // Gérer la division par zéro
+                        AfficheResultat(String.valueOf(Double.NaN));
+                    }
+                }
+
+
+
+            }
+        });
+
+    }
+
+    public void AfficheResultat(String resultat){
+        JOptionPane.showMessageDialog(this,resultat,"Information ",JOptionPane.INFORMATION_MESSAGE);
     }
 
 
