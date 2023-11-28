@@ -18,7 +18,7 @@ Ce projet est une calculatrice simple implémentée en Java à l'aide de l'inter
 ## Captures d'écran
 
 ![Capture d'écran 1](screenshots/screenshot1.jpg)
-![Capture d'écran 2](screenshots/screenshot2.png)
+![Capture d'écran 2](screenshots/screenshot2.jpg)
 
 
 ## Licence
